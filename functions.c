@@ -38,3 +38,14 @@ NodePointer Similar(word w, word* word_array, int n_lines) {
   PrintList(list);
   return list;
 }
+
+void Convert(word start, word end, word*word_array, int n_lines){
+
+  bool* explored = malloc(n_lines*sizeof(bool));
+  for(int i = 0; i < n_lines; i++)
+    explored[i] = false;
+
+  list intial = NULL;
+  InsertFirst(end, &intial);
+  
+}

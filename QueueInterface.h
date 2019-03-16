@@ -3,8 +3,8 @@
 
 #include "QueueTypes.h"
 
-void InitializeQueue(Queue *Q);
+void InitializeQueue(Queue *);
 int Empty(Queue *);
 int Full(Queue *);
-void Insert(ItemType R, Queue *Q);
-void Remove(Queue *Q, ItemType *F);
+void Insert(ItemType , Queue *);
+void Remove(Queue *, ItemType *);

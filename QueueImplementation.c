@@ -60,3 +60,13 @@ void Remove(Queue *Q, ItemType *F)
       if (Q->Front == NULL) Q->Rear = NULL;
    }
 }
+
+ItemType* Head(Queue*Q)
+{
+  return(Q->Front->Item);
+}
+
+ItemType* Tail(Queue*Q)
+{
+  return(Q->Rear->Item);
+}
