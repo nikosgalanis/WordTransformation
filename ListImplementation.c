@@ -40,9 +40,14 @@ void PrintList(NodeType *L)
 
 
 char* DeleteFirstNode(NodeType** L){
+  char* first;
     if(*L != NULL) {
       NodeType* temp = (*L);
+      first =  = (*L)->word;
+      L = (*L)->Link;
+      free(temp);
     }
+    return first;
 }
 
 void DeleteLastNode(NodeType **L)

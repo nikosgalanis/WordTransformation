@@ -84,6 +84,7 @@ void Convert(word start, word end, word*word_array, int n_lines){
 
     NodePointer children = Similar(new, word_array, n_lines);
     while(children != NULL) { //while the list of produced words is not empty
+      word child = DeleteFirstNode(&children);
 
     }
 
