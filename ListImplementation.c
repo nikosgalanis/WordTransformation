@@ -39,6 +39,12 @@ void PrintList(NodeType *L)
 }
 
 
+char* DeleteFirstNode(NodeType** L){
+    if(*L != NULL) {
+      NodeType* temp = (*L);
+    }
+}
+
 void DeleteLastNode(NodeType **L)
 {
       NodeType *PreviousNode, *CurrentNode;

@@ -6,5 +6,7 @@
 void InitializeQueue(Queue *);
 int Empty(Queue *);
 int Full(Queue *);
-void Insert(ItemType , Queue *);
-void Remove(Queue *, ItemType *);
+void Push(ItemType , Queue *);
+void Pop(Queue *, ItemType *);
+ItemType* Head(Queue*);
+ItemType* Tail(Queue*);

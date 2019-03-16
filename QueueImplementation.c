@@ -23,7 +23,7 @@ int Full(Queue *Q)
 /* is not full since it can potentially grow */
 /* as a linked structure.                   */
 
-void Insert(ItemType R, Queue *Q)
+void Push(ItemType R, Queue *Q)
 {
    QueueNode *Temp;
 
@@ -45,7 +45,7 @@ void Insert(ItemType R, Queue *Q)
 }
 
 
-void Remove(Queue *Q, ItemType *F)
+ItemType Pop(Queue *Q, ItemType *F)
 {
    QueueNode *Temp;
 

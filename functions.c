@@ -9,6 +9,16 @@ int cmpfunc(const void *p1, const void *p2) {
   return strcmp(* (char * const *) p1, * (char * const *) p2);
 }
 
+void visited(word w, word* array, char* bool_aray){
+  //we are sure that the word is in the dictionary so we can handle an endless loop(that we will evemtually break)
+  for(int i = 0 ;; i++){
+    if(strcmp(w,array[i]) == 0){
+      bool_aray[i] = 1;
+      return;
+    }
+  }
+}
+
 word change(word a, int index, char letter){
   int length = strlen(a);
   word new = malloc(length*sizeof(char));
@@ -18,8 +28,8 @@ word change(word a, int index, char letter){
     return new;
   }
   else{
-  //if the word is not to be changed, we do not want in in the list as a doublicate
-    return "___";
+    //if the word is not to be changed, we do not want in in the list as a doublicate
+    return "_";
   }
 }
 
@@ -41,11 +51,42 @@ NodePointer Similar(word w, word* word_array, int n_lines) {
 
 void Convert(word start, word end, word*word_array, int n_lines){
 
-  bool* explored = malloc(n_lines*sizeof(bool));
-  for(int i = 0; i < n_lines; i++)
-    explored[i] = false;
+  if(bsearch(&start, word_array, n_lines, sizeof(char*),cmpfunc) == NULL
+      || bsearch(&end, word_array, n_lines, sizeof(char*),cmpfunc) == NULL)
+      {
+        printf("One or more words not part of the dictionary!\n");
+        return;
+      }
 
-  list intial = NULL;
+  Queue queue; InitializeQueue(queue);
+
+  char* explored = malloc(n_lines*sizeof(char));
+  for(int i = 0; i < n_lines; i++)
+    explored[i] = 0;
+
+  NodePointer intial = NULL;
   InsertFirst(end, &intial);
-  
+  visited(end, word_array, explored);
+
+  Push(queue,inital);
+
+  int step_count = 0;
+  while(true) {
+    NodePointer current = Head(queue);
+    word new = current->word;
+
+    if(strcmp(new, start) == 0){
+      printf("The path from the first word to the second is:");
+      PrintList(current);
+      printf("We took %d steps to get there\n", step_count);
+      return;
+    }
+
+    NodePointer children = Similar(new, word_array, n_lines);
+    while(children != NULL) { //while the list of produced words is not empty
+
+    }
+
+  }
+
 }
