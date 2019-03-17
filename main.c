@@ -40,7 +40,7 @@ int main(void){
 
   fclose(input);
 
-  Convert(word_array[8288], word_array[15326], word_array, n_lines);
+  Convert("table", "acton", word_array, n_lines);
 
 
   for(int i = 0; i < n_lines; i++){

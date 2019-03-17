@@ -40,15 +40,14 @@ void PrintList(NodeType *L)
 
 
 char* DeleteFirstNode(NodeType** L){
-  char* first;
+  char* first = NULL;
     if(*L != NULL) {
       NodePointer temp = (*L);
       int l = strlen((*L)->word);
       first = malloc((l+1)*sizeof(char));
       strcpy(first,(*L)->word);
       (*L) = (*L)->Link;
-      (temp) -> Link = NULL;
-      free(temp);
+      //free(temp);
     }
     return first;
 }

@@ -9,6 +9,21 @@ int cmpfunc(const void *p1, const void *p2) {
   return strcmp(* (char * const *) p1, * (char * const *) p2);
 }
 
+int binsearch(word w, int n, word* array) { //return the position of the word in the array, if found
+  int cond, low, high, mid;
+  low = 0;
+  high = n-1;
+  while (low <= high) {
+    mid = (low+high)/2;
+    if ((cond = strcmp(w, array[mid])) < 0)
+      high = mid-1;
+    else if (cond > 0)
+      low = mid+1;
+    else return mid;
+  }
+  return -1;
+}
+
 void visited(word w, word* array, char* bool_aray){
   //we are sure that the word is in the dictionary so we can handle an endless loop(that we will evemtually break)
   for(int i = 0 ;; i++){
@@ -83,9 +98,13 @@ void Convert(word start, word end, word*word_array, int n_lines){
     NodePointer children = Similar(new, word_array, n_lines);
     while(children != NULL) { //while the list of produced words is not empty
       word child = DeleteFirstNode(&children);
-      InsertFirst(child, &current); //insert the Similar word in the list
-      Insert(current,queue,start); //insert the new list in the pq
-      DeleteFirstNode(&current); //delete the node from the list
+      int pos = binsearch(child,n_lines,word_array);
+      if(explored[pos] == 0){
+        InsertFirst(child, &current); //insert the Similar word in the list
+        Insert(current,queue,start); //insert the new list in the pq
+        DeleteFirstNode(&current); //delete the node from the list
+        explored[pos] = 1;
+      }
     }
 
   }
