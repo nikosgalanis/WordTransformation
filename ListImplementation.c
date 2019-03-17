@@ -3,8 +3,7 @@
 #include <stdlib.h>
 #include "ListInterface.h"
 
-void InsertNewLastNode(char *w, NodeType **L)
-{
+void InsertNewLastNode(char *w, NodeType **L) {
       NodeType *N, *P;
       int w_length = strlen(w);
       N = (NodeType *)malloc(sizeof(NodeType));
@@ -24,8 +23,7 @@ void InsertNewLastNode(char *w, NodeType **L)
 
 
 
-void PrintList(NodeType *L)
-{
+void PrintList(NodeType *L) {
       NodeType *N;
 
       printf("(");
@@ -39,7 +37,7 @@ void PrintList(NodeType *L)
 }
 
 
-char* DeleteFirstNode(NodeType** L){
+char* DeleteFirstNode(NodeType** L) {
   char* first = NULL;
     if(*L != NULL) {
       NodePointer temp = (*L);
@@ -47,13 +45,12 @@ char* DeleteFirstNode(NodeType** L){
       first = malloc((l+1)*sizeof(char));
       strcpy(first,(*L)->word);
       (*L) = (*L)->Link;
-      //free(temp);
+      // free(temp);
     }
     return first;
 }
 
-void DeleteLastNode(NodeType **L)
-{
+void DeleteLastNode(NodeType **L) {
       NodeType *PreviousNode, *CurrentNode;
 
       if (*L != NULL) {
@@ -74,8 +71,7 @@ void DeleteLastNode(NodeType **L)
 }
 
 
-void InsertFirst(char* w,NodeType **L)
-{
+void InsertFirst(char* w,NodeType **L) {
       NodeType *N;
       int w_length = strlen(w);
       N = malloc(sizeof(NodeType));
@@ -95,8 +91,7 @@ int Length(NodeType* L){
   return count;
 }
 
-NodeType *ListSearch(char *w, NodeType *L)
-{
+NodeType *ListSearch(char *w, NodeType *L) {
       NodeType *N;
 
       N = L;

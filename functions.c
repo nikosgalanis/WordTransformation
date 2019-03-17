@@ -9,7 +9,8 @@ int cmpfunc(const void *p1, const void *p2) {
   return strcmp(* (char * const *) p1, * (char * const *) p2);
 }
 
-int binsearch(word w, int n, word* array) { //return the position of the word in the array, if found
+//return the position of the word in the array, if found
+int binsearch(word w, int n, word* array) {
   int cond, low, high, mid;
   low = 0;
   high = n-1;
@@ -34,6 +35,7 @@ void visited(word w, word* array, char* bool_aray){
   }
 }
 
+//change the n-th letter of the word
 word change(word a, int index, char letter){
   int length = strlen(a);
   word new = malloc((length+1)*sizeof(char));
@@ -48,6 +50,7 @@ word change(word a, int index, char letter){
   }
 }
 
+//generate a list of the words that differ from the given word, only by 1 letter
 NodePointer Similar(word w, word* word_array, int n_lines) {
   int length = strlen(w);
   NodePointer list = NULL;
@@ -61,48 +64,42 @@ NodePointer Similar(word w, word* word_array, int n_lines) {
   }
   return list;
 }
-
+//Convert function
 void Convert(word start, word end, word*word_array, int n_lines){
-
-  if(bsearch(&start, word_array, n_lines, sizeof(char*),cmpfunc) == NULL
-      || bsearch(&end, word_array, n_lines, sizeof(char*),cmpfunc) == NULL)
-      {
-        printf("One or more words not part of the dictionary!\n");
-        return;
-      }
 
   PriorityQueue* queue = Initialize(queue);
 
+  //create and allocate space for a pseudo-boolean array to determine whether or not we have allready traversed a word
   char* explored = malloc(n_lines*sizeof(char));
   for(int i = 0; i < n_lines; i++)
     explored[i] = 0;
 
-  NodePointer initial = NULL;
+  NodePointer initial = NULL;                                                   //Initialize a list that contains only the first word
   InsertFirst(end, &initial);
-  visited(end, word_array, explored);
+  visited(end, word_array, explored);                                           //and mark it as visited
 
   Insert(initial, queue,start);
 
-  int step_count = 0;
-  while(1) {
+  int step_count = 0;                                                           //variable to store the total steps to get to our goal
+  while(1) {                                                                    //perform a bfs search
     NodePointer current = Remove(queue);
     word new = current->word;
 
     if(strcmp(new, start) == 0){
-      printf("The path from the first word to the second is:");
+      printf("The path from the first word to the second is: ");
       PrintList(current);
       printf("We took %d steps to get there\n", step_count);
       return;
     }
     step_count++;
     NodePointer children = Similar(new, word_array, n_lines);
-    while(children != NULL) { //while the list of produced words is not empty
+    while(children != NULL) {                                                   //while the list of produced words is not empty
       word child = DeleteFirstNode(&children);
       int pos = binsearch(child,n_lines,word_array);
       if(explored[pos] == 0){
-        InsertFirst(child, &current); //insert the Similar word in the list
-        Insert(current,queue,start); //insert the new list in the pq
-        DeleteFirstNode(&current); //delete the node from the list
+        InsertFirst(child, &current);                                           //insert the Similar word in the list
+        Insert(current,queue,start);                                            //insert the new list in the pq
+        DeleteFirstNode(&current);                                              //delete the node from the list
         explored[pos] = 1;
       }
     }

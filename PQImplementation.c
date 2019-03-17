@@ -21,7 +21,7 @@ int differs(word curr, word goal){                                              
 int f(PQItem current, word goal){                                               //Implementation of A* algorithm for sorted insertion
   int g = Length(current) - 1;
   int h = differs(current->word, goal);
-  return(g+h);
+  return(g + h);
 }
 
 
