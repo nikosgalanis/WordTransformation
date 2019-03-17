@@ -58,7 +58,7 @@ void Convert(word start, word end, word*word_array, int n_lines){
         return;
       }
 
-  Queue queue; InitializeQueue(queue);
+  PriorityQueue* queue; Initialize(queue);
 
   char* explored = malloc(n_lines*sizeof(char));
   for(int i = 0; i < n_lines; i++)
@@ -68,11 +68,11 @@ void Convert(word start, word end, word*word_array, int n_lines){
   InsertFirst(end, &intial);
   visited(end, word_array, explored);
 
-  Push(queue,inital);
+  Insert(insert, queue);
 
   int step_count = 0;
   while(true) {
-    NodePointer current = Head(queue);
+    NodePointer current = Pop(queue);
     word new = current->word;
 
     if(strcmp(new, start) == 0){

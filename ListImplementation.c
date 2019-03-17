@@ -83,7 +83,14 @@ void InsertFirst(char* w,NodeType **L)
       (*L) = N;
 }
 
-
+int Length(NodeType* L){
+  int count = 0;
+  while(L != NULL){
+    count++
+    L = L->Link;
+  }
+  return count;
+}
 
 NodeType *ListSearch(char *w, NodeType *L)
 {
