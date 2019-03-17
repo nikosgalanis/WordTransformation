@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ListTypes.h"
+#include "ListInterface.h"
 
-typedef NodeItem* PQItem;
+typedef NodeType* PQItem;
 
 typedef struct PQNodeTag {
            PQItem   NodeItem;

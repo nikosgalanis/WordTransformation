@@ -7,5 +7,6 @@ typedef char* word;
 void Initialize (PriorityQueue *);
 int Empty (PriorityQueue *);
 int Full (PriorityQueue *);
-void Insert (PQItem, PriorityQueue *);
+PQListNode *SortedInsert(PQItem, PQListNode *, word);
+void Insert (PQItem, PriorityQueue *,word);
 PQItem Remove (PriorityQueue *);

@@ -43,8 +43,8 @@ char* DeleteFirstNode(NodeType** L){
   char* first;
     if(*L != NULL) {
       NodeType* temp = (*L);
-      first =  = (*L)->word;
-      L = (*L)->Link;
+      first = (*L)->word;
+      (*L) = (*L)->Link;
       free(temp);
     }
     return first;
@@ -86,7 +86,7 @@ void InsertFirst(char* w,NodeType **L)
 int Length(NodeType* L){
   int count = 0;
   while(L != NULL){
-    count++
+    count++;
     L = L->Link;
   }
   return count;

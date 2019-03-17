@@ -64,15 +64,15 @@ void Convert(word start, word end, word*word_array, int n_lines){
   for(int i = 0; i < n_lines; i++)
     explored[i] = 0;
 
-  NodePointer intial = NULL;
-  InsertFirst(end, &intial);
+  NodePointer initial = NULL;
+  InsertFirst(end, &initial);
   visited(end, word_array, explored);
 
-  Insert(insert, queue);
+  Insert(initial, queue,start);
 
   int step_count = 0;
-  while(true) {
-    NodePointer current = Pop(queue);
+  while(1) {
+    NodePointer current = Remove(queue);
     word new = current->word;
 
     if(strcmp(new, start) == 0){
@@ -85,7 +85,9 @@ void Convert(word start, word end, word*word_array, int n_lines){
     NodePointer children = Similar(new, word_array, n_lines);
     while(children != NULL) { //while the list of produced words is not empty
       word child = DeleteFirstNode(&children);
-
+      InsertFirst(child, &current); //insert the Similar word in the list
+      Insert(current,queue,start); //insert the new list in the pq
+      DeleteFirstNode(&current); //delete the node from the list
     }
 
   }

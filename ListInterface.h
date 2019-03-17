@@ -2,6 +2,7 @@
 #include "ListTypes.h"
 
 /* function prototypes */
+int Length(NodeType*);
 void InsertFirst(char*, NodeType **);
 void InsertLast(char *, NodeType **);
 void DeleteLastNode(NodeType **);

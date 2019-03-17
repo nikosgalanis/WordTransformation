@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "QueueTypes.h"
+#include "PQTypes.h"
 #include "ListTypes.h"
 #include "functions.h"
 
@@ -39,8 +39,8 @@ int main(void){
   qsort(word_array, n_lines , sizeof(char*), cmpfunc);
 
   fclose(input);
-  printf("The word is %s\n", word_array[2661]);
-  NodePointer list = Similar(word_array[2661],word_array,n_lines);
+  printf("The word is %s\n", "art");
+  NodePointer list = Similar("art",word_array,n_lines);
 
   return 0;
 }

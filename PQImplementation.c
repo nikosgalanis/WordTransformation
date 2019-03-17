@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "PQInterface.h"
 
 /* Now we give all the details of the functions */
@@ -46,16 +47,16 @@ PQListNode *SortedInsert(PQItem Item, PQListNode *P, word goal) {               
       N->Link = P;
       return(N);
    } else {
-      P->Link = SortedInsert(Item, P->Link);
+      P->Link = SortedInsert(Item, P->Link,goal);
       return(P);
    }
 }
 
 
-void Insert(PQItem Item, PriorityQueue *PQ) {                                   //PriorityQueue insertion
+void Insert(PQItem Item, PriorityQueue *PQ,word goal) {                                   //PriorityQueue insertion
    if (!Full(PQ)) {
      PQ->Count++;
-     PQ->ItemList = SortedInsert(Item, PQ->ItemList);
+     PQ->ItemList = SortedInsert(Item, PQ->ItemList, goal);
    }
 }
 
