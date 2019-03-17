@@ -23,13 +23,13 @@ int main(void){
   }
   rewind(input);
   word* word_array;
-  if ((word_array = malloc(n_lines * sizeof(word))) == NULL){
+  if ((word_array = malloc(n_lines * sizeof(char*))) == NULL){
     printf("Not enough memory!\n");
     return -1;
   }
 
   for(int i = 0; i < n_lines; i++){
-    if((word_array[i] = malloc(max_w_length * sizeof(char))) == NULL){
+    if((word_array[i] = malloc((max_w_length+1) * sizeof(char))) == NULL){
       printf("Not enough memory!\n");
       return -1;
     }
@@ -39,8 +39,14 @@ int main(void){
   qsort(word_array, n_lines , sizeof(char*), cmpfunc);
 
   fclose(input);
-  printf("The word is %s\n", "art");
-  NodePointer list = Similar("art",word_array,n_lines);
+
+  Convert(word_array[8288], word_array[15326], word_array, n_lines);
+
+
+  for(int i = 0; i < n_lines; i++){
+    free(word_array[i]);
+  }
+  free(word_array);
 
   return 0;
 }

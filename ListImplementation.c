@@ -42,9 +42,12 @@ void PrintList(NodeType *L)
 char* DeleteFirstNode(NodeType** L){
   char* first;
     if(*L != NULL) {
-      NodeType* temp = (*L);
-      first = (*L)->word;
+      NodePointer temp = (*L);
+      int l = strlen((*L)->word);
+      first = malloc((l+1)*sizeof(char));
+      strcpy(first,(*L)->word);
       (*L) = (*L)->Link;
+      (temp) -> Link = NULL;
       free(temp);
     }
     return first;
@@ -76,7 +79,7 @@ void InsertFirst(char* w,NodeType **L)
 {
       NodeType *N;
       int w_length = strlen(w);
-      N = (NodeType *)malloc(sizeof(NodeType));
+      N = malloc(sizeof(NodeType));
       N->word = malloc((w_length+1)*sizeof(char));
       strcpy(N->word, w);
       N->Link = (*L);
@@ -85,9 +88,10 @@ void InsertFirst(char* w,NodeType **L)
 
 int Length(NodeType* L){
   int count = 0;
-  while(L != NULL){
+  NodePointer temp = L;
+  while(temp != NULL){
     count++;
-    L = L->Link;
+    temp = temp->Link;
   }
   return count;
 }

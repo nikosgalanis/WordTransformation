@@ -4,7 +4,7 @@
 /* defines types PQItem and PriorityQueue */
 typedef char* word;
 
-void Initialize (PriorityQueue *);
+PriorityQueue* Initialize (PriorityQueue *);
 int Empty (PriorityQueue *);
 int Full (PriorityQueue *);
 PQListNode *SortedInsert(PQItem, PQListNode *, word);

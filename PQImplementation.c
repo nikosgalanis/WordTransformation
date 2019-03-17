@@ -25,9 +25,11 @@ int f(PQItem current, word goal){                                               
 }
 
 
-void Initialize(PriorityQueue *PQ) {                                            //Initialize a pq
+PriorityQueue* Initialize(PriorityQueue *PQ) {                                            //Initialize a pq
+   PQ = malloc(sizeof(PriorityQueue));
    PQ->Count = 0;
    PQ->ItemList = NULL;
+   return PQ;
 }
 
 int Empty(PriorityQueue *PQ) {                                                  //Determine whether the pq is empty or not

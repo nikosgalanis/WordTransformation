@@ -21,7 +21,7 @@ void visited(word w, word* array, char* bool_aray){
 
 word change(word a, int index, char letter){
   int length = strlen(a);
-  word new = malloc(length*sizeof(char));
+  word new = malloc((length+1)*sizeof(char));
   strcpy(new,a);
   if(a[index] != letter){
     new[index] = letter;
@@ -35,7 +35,6 @@ word change(word a, int index, char letter){
 
 NodePointer Similar(word w, word* word_array, int n_lines) {
   int length = strlen(w);
-  printf("length is %d\n", length);
   NodePointer list = NULL;
   for(int i = 0; i < length; i++){
     for(char l = 'a'; l <= 'z'; l++){
@@ -45,7 +44,6 @@ NodePointer Similar(word w, word* word_array, int n_lines) {
       }
     }
   }
-  PrintList(list);
   return list;
 }
 
@@ -58,7 +56,7 @@ void Convert(word start, word end, word*word_array, int n_lines){
         return;
       }
 
-  PriorityQueue* queue; Initialize(queue);
+  PriorityQueue* queue = Initialize(queue);
 
   char* explored = malloc(n_lines*sizeof(char));
   for(int i = 0; i < n_lines; i++)
@@ -81,7 +79,7 @@ void Convert(word start, word end, word*word_array, int n_lines){
       printf("We took %d steps to get there\n", step_count);
       return;
     }
-
+    step_count++;
     NodePointer children = Similar(new, word_array, n_lines);
     while(children != NULL) { //while the list of produced words is not empty
       word child = DeleteFirstNode(&children);
