@@ -25,8 +25,9 @@ char* DeleteFirstNode(NodeType** L) {
       first = malloc((l+1)*sizeof(char));
       strcpy(first,(*L)->word);
       (*L) = (*L)->Link;
-      free((temp)->word);
-      free(temp->Link);
+      //free((temp)->word);
+      //temp->Link = NULL;
+      //free(temp);
     }
     return first;
 }

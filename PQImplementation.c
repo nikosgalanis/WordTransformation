@@ -25,7 +25,7 @@ int f(PQItem current, word goal){                                               
 }
 
 
-PriorityQueue* Initialize(PriorityQueue *PQ) {                                            //Initialize a pq
+PriorityQueue* Initialize(PriorityQueue *PQ) {                                  //Initialize a pq
    PQ = malloc(sizeof(PriorityQueue));
    PQ->Count = 0;
    PQ->ItemList = NULL;
@@ -41,7 +41,7 @@ int Full(PriorityQueue *PQ) {                                                   
    return(0);
 }
 
-PQListNode *SortedInsert(PQItem Item, PQListNode *P, word goal) {                          //recursive function in order to insert a new node to the PQ
+PQListNode *SortedInsert(PQItem Item, PQListNode *P, word goal) {               //recursive function in order to insert a new node to the PQ
    PQListNode *N;
    if ((P == NULL) || (f(Item,goal) <= f(P->NodeItem,goal))) {
       N = malloc(sizeof(PQListNode));
@@ -55,7 +55,7 @@ PQListNode *SortedInsert(PQItem Item, PQListNode *P, word goal) {               
 }
 
 
-void Insert(PQItem Item, PriorityQueue *PQ,word goal) {                                   //PriorityQueue insertion
+void Insert(PQItem Item, PriorityQueue *PQ,word goal) {                         //PriorityQueue insertion
    if (!Full(PQ)) {
      PQ->Count++;
      PQ->ItemList = SortedInsert(Item, PQ->ItemList, goal);
@@ -64,10 +64,12 @@ void Insert(PQItem Item, PriorityQueue *PQ,word goal) {                         
 
 PQItem Remove(PriorityQueue *PQ) {                                              //Pop the first item from the queue
    PQItem temp;
+   PQListNode* first = PQ->ItemList;
    if (!Empty(PQ)){
      temp = PQ->ItemList->NodeItem;
      PQ->ItemList = PQ->ItemList->Link;
      PQ->Count--;
+     free(temp);
      return(temp);
    }
 }

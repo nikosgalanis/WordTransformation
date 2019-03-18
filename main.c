@@ -47,7 +47,7 @@ int main(void){
 
   printf("Give the first word\n"); scanf("%s", first);
   printf("Give the second word\n"); scanf("%s", second);
-  //if the user inserts words that are not of the same length, or that they are not in the dictionary, display an error message and ask again
+  /*if the user inserts words that are not of the same length, or that they are not in the dictionary, display an error message and ask again*/
   while(bsearch(&first, word_array, n_lines, sizeof(char*),cmpfunc) == NULL
       || bsearch(&second, word_array, n_lines, sizeof(char*),cmpfunc) == NULL
       || (strlen(first) != strlen(second))){
@@ -63,6 +63,10 @@ int main(void){
   double endtime = ((double) clock())/CLOCKS_PER_SEC;
 
   printf("The convertion took us %.4f seconds\n", endtime-sttime);
+
+  // NodePointer list = Similar("cat",word_array,n_lines);
+  // DeleteFirstNode(&list);
+  // PrintList(list);
 
   for(int i = 0; i < n_lines; i++){                                             //free the array
     free(word_array[i]);
