@@ -42,8 +42,8 @@ int main(void){
 
   fclose(input);                                                                //close the useless file
 
-  word first = malloc(max_w_length*sizeof(char));                               //allocate space for the 2 words
-  word second = malloc(max_w_length*sizeof(char));
+  word first = malloc((max_w_length+1)*sizeof(char));                               //allocate space for the 2 words
+  word second = malloc((max_w_length+1)*sizeof(char));
 
   printf("Give the first word\n"); scanf("%s", first);
   printf("Give the second word\n"); scanf("%s", second);

@@ -9,7 +9,7 @@
 /* declared in the interface file together with */
 /* local private functions.                     */
 
-int differs(word curr, word goal){                                              //Implementation of the heuristic function
+int differs(word curr, word goal) {                                             //Implementation of the heuristic function
   int l = strlen(curr);
   int dif = 0;
   for(int i = 0; i < l; i++){
@@ -18,7 +18,7 @@ int differs(word curr, word goal){                                              
   return dif;
 }
 
-int f(PQItem current, word goal){                                               //Implementation of A* algorithm for sorted insertion
+int f(PQItem current, word goal) {                                              //Implementation of A* algorithm for sorted insertion
   int g = Length(current) - 1;
   int h = differs(current->word, goal);
   return(g + h);
@@ -27,6 +27,7 @@ int f(PQItem current, word goal){                                               
 
 PriorityQueue* Initialize(PriorityQueue *PQ) {                                  //Initialize a pq
    PQ = malloc(sizeof(PriorityQueue));
+   if(PQ == NULL) printf("Stack overflow!!\n");
    PQ->Count = 0;
    PQ->ItemList = NULL;
    return PQ;
@@ -45,6 +46,8 @@ PQListNode *SortedInsert(PQItem Item, PQListNode *P, word goal) {               
    PQListNode *N;
    if ((P == NULL) || (f(Item,goal) <= f(P->NodeItem,goal))) {
       N = malloc(sizeof(PQListNode));
+      if(N == NULL) printf("Stack overflow!!\n");
+
       N->NodeItem = Item;
       N->Link = P;
       return(N);
@@ -69,7 +72,7 @@ PQItem Remove(PriorityQueue *PQ) {                                              
      temp = PQ->ItemList->NodeItem;
      PQ->ItemList = PQ->ItemList->Link;
      PQ->Count--;
-     free(temp);
+     free(first);
      return(temp);
    }
 }

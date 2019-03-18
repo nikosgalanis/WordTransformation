@@ -39,6 +39,7 @@ void visited(word w, word* array, char* bool_aray){
 word change(word a, int index, char letter){
   int length = strlen(a);
   word new = malloc((length+1)*sizeof(char));
+  if(new == NULL) printf("Stack overflow!\n");
   strcpy(new,a);
   if(a[index] != letter){
     new[index] = letter;
@@ -84,12 +85,20 @@ void Convert(word start, word end, word*word_array, int n_lines){
 
   Insert(initial, queue,start);
   word new = malloc(strlen(start)*sizeof(char));
-
+  if(new == NULL){
+    printf("Stack overflow!\n");
+    return;
+  }
+  int w_length = strlen(start);
   int step_count = 0;                                                           //variable to store the total steps to get to our goal
   int done = 0;                                                                 //flag to see if we are done
   while(1) {                                                                    //perform a bfs search
     NodePointer current = Remove(queue);
-    word new = malloc(strlen(start)*sizeof(char));
+    word new = malloc((w_length+1)*sizeof(char));
+    if(new == NULL){
+      printf("Stack overflow!\n");
+      return;
+    }
     strcpy(new,current->word);
 
     step_count++;

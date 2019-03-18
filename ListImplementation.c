@@ -19,10 +19,13 @@ void PrintList(NodeType *L) {
 
 char* DeleteFirstNode(NodeType** L) {
   char* first = NULL;
+  NodeType* temp = NULL;
     if(*L != NULL) {
-      NodePointer temp = (*L);
+      temp = (*L);
       int l = strlen((*L)->word);
       first = malloc((l+1)*sizeof(char));
+      if(first == NULL) printf("Stack overflow!!\n");
+
       strcpy(first,(*L)->word);
       (*L) = (*L)->Link;
       //free((temp)->word);
@@ -35,7 +38,9 @@ char* DeleteFirstNode(NodeType** L) {
 void InsertFirst(char* w,NodeType **L) {
       NodeType *N;
       int w_length = strlen(w);
+      //printf("%d\n", w_length);
       N = malloc(sizeof(NodeType));
+      if(N == NULL) printf("Stack overflow!!\n");
       N->word = malloc((w_length+1)*sizeof(char));
       strcpy(N->word, w);
       N->Link = (*L);
