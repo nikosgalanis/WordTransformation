@@ -84,17 +84,15 @@ void Convert(word start, word end, word*word_array, int n_lines){
   visited(end, word_array, explored);                                           //and mark it as visited
 
   Insert(initial, queue,start);
-  word new = malloc(strlen(start)*sizeof(char));
+  word new = malloc((strlen(start)+1)*sizeof(char));
   if(new == NULL){
     printf("Stack overflow!\n");
     return;
   }
-  int w_length = strlen(start);
   int step_count = 0;                                                           //variable to store the total steps to get to our goal
   int done = 0;                                                                 //flag to see if we are done
   while(1) {                                                                    //perform a bfs search
     NodePointer current = Remove(queue);
-    word new = malloc((w_length+1)*sizeof(char));
     if(new == NULL){
       printf("Stack overflow!\n");
       return;
@@ -110,6 +108,9 @@ void Convert(word start, word end, word*word_array, int n_lines){
       PrintList(current);
       printf("We took %d steps to get there\n", step_count);
       return;
+    }
+    if(children == NULL){
+      printf("Unfortunately, we can not make this convertion!\n");
     }
     while(children != NULL) {                                                   //while the list of produced words is not empty
       word child = DeleteFirstNode(&children);

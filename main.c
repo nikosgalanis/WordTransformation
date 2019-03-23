@@ -62,8 +62,10 @@ int main(void){
 
   double endtime = ((double) clock())/CLOCKS_PER_SEC;
 
+  int i = 0;
+  NodePointer L = Similar("art",word_array,n_lines, "___", &i);
   printf("The convertion took us %.4f seconds\n", endtime-sttime);
-
+  PrintList(L);
   // NodePointer list = Similar("cat",word_array,n_lines);
   // DeleteFirstNode(&list);
   // PrintList(list);
