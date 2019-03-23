@@ -42,7 +42,7 @@ int main(void){
 
   fclose(input);                                                                //close the useless file
 
-  word first = malloc((max_w_length+1)*sizeof(char));                               //allocate space for the 2 words
+  word first = malloc((max_w_length+1)*sizeof(char));                           //allocate space for the 2 words
   word second = malloc((max_w_length+1)*sizeof(char));
 
   printf("Give the first word\n"); scanf("%s", first);
@@ -62,13 +62,8 @@ int main(void){
 
   double endtime = ((double) clock())/CLOCKS_PER_SEC;
 
-  int i = 0;
-  NodePointer L = Similar("art",word_array,n_lines, "___", &i);
   printf("The convertion took us %.4f seconds\n", endtime-sttime);
-  PrintList(L);
-  // NodePointer list = Similar("cat",word_array,n_lines);
-  // DeleteFirstNode(&list);
-  // PrintList(list);
+ 
 
   for(int i = 0; i < n_lines; i++){                                             //free the array
     free(word_array[i]);
