@@ -1,19 +1,32 @@
-# Declaration of variables
+TARGET_EXEC ?= word_morph
+
 CC = gcc
+CC_FLAGS = -w
 
-# File names
-EXEC = word_transform
-SOURCES = $(wildcard *.c)
-OBJECTS = $(SOURCES:.c=.o)
+BUILD_DIR ?= ./build
+SRC_DIRS ?= ./src
 
-# Main target
-$(EXEC): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(EXEC)
+SRCS := $(shell find $(SRC_DIRS) -name *.c)
+OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+DEPS := $(OBJS:.o=.d)
 
-# To obtain object files
-%.o: %.c
-	$(CC) -g -c $(CC_FLAGS) $< -o $@
+INC_DIRS := $(shell find $(SRC_DIRS) -type d)
+INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-# To remove generated files
+$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
+	$(CC) $(OBJS) -o $@ $(LDFLAGS)
+
+# c++ source
+$(BUILD_DIR)/%.c.o: %.c
+	$(MKDIR_P) $(dir $@)
+	$(CC) -c $(CC_FLAGS) $< -o $@
+
+
+.PHONY: clean
+
 clean:
-	rm -f $(EXEC) $(OBJECTS)
+	$(RM) -r $(BUILD_DIR)
+
+-include $(DEPS)
+
+MKDIR_P ?= mkdir -p
