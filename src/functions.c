@@ -27,7 +27,7 @@ int binsearch(word w, int n, word* array) {
 
 void visited(word w, word* array, char* bool_aray){
   /*we are sure that the word is in the dictionary so we can handle an endless loop(that we will evemtually break)*/
-  for(int i = 0 ; i < 50000; i++){
+  for(int i = 0 ;; i++){
     if(strcmp(w,array[i]) == 0){
       bool_aray[i] = 1;
       return;
