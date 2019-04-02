@@ -38,7 +38,7 @@ void visited(word w, word* array, char* bool_aray){
 /*change the n-th letter of the word*/
 word change(word a, int index, char letter){
   int length = strlen(a);
-  word new = malloc((length+1) * sizeof(char));
+  word new = malloc((length+1)*sizeof(char));
   if(new == NULL) printf("Stack overflow!\n");
   strcpy(new,a);
   if(a[index] != letter){
@@ -58,7 +58,7 @@ NodePointer Similar(word w, word* word_array, int n_lines,word goal, int* done) 
   for(int i = 0; i < length; i++){
     for(char l = 'a'; l <= 'z'; l++){
       word new = change(w,i,l);
-      if(bsearch(&new, word_array, n_lines, sizeof(char*), cmpfunc) != NULL) {
+      if(bsearch(&new, word_array, n_lines, sizeof(char*),cmpfunc) != NULL) {
         if(strcmp(goal,new) == 0){
           *done = 1;
           return NULL;
@@ -84,7 +84,7 @@ void Convert(word start, word end, word*word_array, int n_lines){
   visited(end, word_array, explored);                                           //and mark it as visited
 
   Insert(initial, queue,start);
-  word new = malloc((strlen(start)+1) * sizeof(char));
+  word new = malloc((strlen(start)+1)*sizeof(char));
   if(new == NULL){
     printf("Stack overflow!\n");
     return;
@@ -101,9 +101,9 @@ void Convert(word start, word end, word*word_array, int n_lines){
 
     step_count++;
 
-    NodePointer children = Similar(new, word_array, n_lines, start, &done);
+    NodePointer children = Similar(new, word_array, n_lines,start,&done);
     if(done == 1){                                                              //if similar reached the desired word, then we are done!
-      InsertFirst(start, &current);                                             //insert the final word in the list
+      InsertFirst(start,&current);                                              //insert the final word in the list
       printf("The path from the first word to the second is: ");                //Print the list and the stats
       PrintList(current);
       printf("We took %d steps to get there\n", step_count);
@@ -115,10 +115,10 @@ void Convert(word start, word end, word*word_array, int n_lines){
     }
     while(children != NULL) {                                                   //while the list of produced words is not empty
       word child = DeleteFirstNode(&children);
-      int pos = binsearch(child, n_lines, word_array);
+      int pos = binsearch(child,n_lines,word_array);
       if(explored[pos] == 0){
         InsertFirst(child, &current);                                           //insert the Similar word in the list
-        Insert(current, queue, start);                                          //insert the new list in the pq
+        Insert(current,queue,start);                                            //insert the new list in the pq
         DeleteFirstNode(&current);                                              //delete the node from the list
         explored[pos] = 1;
       }

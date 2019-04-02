@@ -44,9 +44,10 @@ int Full(PriorityQueue *PQ) {                                                   
 
 PQListNode *SortedInsert(PQItem Item, PQListNode *P, word goal) {               //recursive function in order to insert a new node to the PQ
    PQListNode *N;
-   if ((P == NULL) || (f(Item,goal) <= f(P->NodeItem,goal))) {
+   if ((P == NULL) || (f(Item,goal) <= f(P->NodeItem,goal))) {                  //use of the heuristic function
       N = malloc(sizeof(PQListNode));
       if(N == NULL) printf("Stack overflow!!\n");
+
       N->NodeItem = Item;
       N->Link = P;
       return(N);
@@ -76,7 +77,7 @@ PQItem Remove(PriorityQueue *PQ) {                                              
    }
 }
 
-void Destroy(PriorityQueue* PQ) {                                             //Destroy the whole Q, when we do not need it
+void Destroy(PriorityQueue* PQ) {
   PQListNode* first;
   while(PQ->ItemList != NULL) {
     first = PQ->ItemList;
