@@ -15,20 +15,20 @@ int binsearch(word w, int n, word* array) {
   low = 0;
   high = n-1;
   while (low <= high) {
-    mid = (low+high)/2;
+    mid = (low+high) / 2;
     if ((cond = strcmp(w, array[mid])) < 0)
-      high = mid-1;
+      high = mid - 1;
     else if (cond > 0)
-      low = mid+1;
+      low = mid + 1;
     else return mid;
   }
   return -1;
 }
 
-void visited(word w, word* array, char* bool_aray){
+void visited(word w, word* array, char* bool_aray) {
   /*we are sure that the word is in the dictionary so we can handle an endless loop(that we will evemtually break)*/
-  for(int i = 0 ;; i++){
-    if(strcmp(w,array[i]) == 0){
+  for(int i = 0 ;; i++) {
+    if(strcmp(w,array[i]) == 0) {
       bool_aray[i] = 1;
       return;
     }
@@ -36,7 +36,7 @@ void visited(word w, word* array, char* bool_aray){
 }
 
 /*change the n-th letter of the word*/
-word change(word a, int index, char letter){
+word change(word a, int index, char letter) {
   int length = strlen(a);
   word new = malloc((length+1)*sizeof(char));
   if(new == NULL) printf("Stack overflow!\n");
@@ -55,11 +55,11 @@ word change(word a, int index, char letter){
 NodePointer Similar(word w, word* word_array, int n_lines,word goal, int* done) {
   int length = strlen(w);
   NodePointer list = NULL;
-  for(int i = 0; i < length; i++){
-    for(char l = 'a'; l <= 'z'; l++){
+  for(int i = 0; i < length; i++) {
+    for(char l = 'a'; l <= 'z'; l++) {
       word new = change(w,i,l);
       if(bsearch(&new, word_array, n_lines, sizeof(char*),cmpfunc) != NULL) {
-        if(strcmp(goal,new) == 0){
+        if(strcmp(goal,new) == 0) {
           *done = 1;
           return NULL;
         }
@@ -70,7 +70,7 @@ NodePointer Similar(word w, word* word_array, int n_lines,word goal, int* done) 
   return list;
 }
 /*Convert function*/
-void Convert(word start, word end, word*word_array, int n_lines){
+void Convert(word start, word end, word*word_array, int n_lines) {
 
   PriorityQueue* queue = Initialize(queue);
 
@@ -110,7 +110,7 @@ void Convert(word start, word end, word*word_array, int n_lines){
       Destroy(queue);
       return;
     }
-    if(children == NULL){
+    if(children == NULL) {
       printf("Unfortunately, we can not make this convertion!\n");
     }
     while(children != NULL) {                                                   //while the list of produced words is not empty
