@@ -26,7 +26,7 @@ char* DeleteFirstNode(NodeType** L) {
       first = malloc((l+1)*sizeof(char));
       if(first == NULL) printf("Stack overflow!!\n");
 
-      strcpy(first,(*L)->word);
+      strcpy(first, (*L)->word);
       (*L) = (*L)->Link;
     }
     return first;
@@ -43,10 +43,10 @@ void InsertFirst(char* w,NodeType **L) {
       (*L) = N;
 }
 
-int Length(NodeType* L){
+int Length(NodeType* L) {
   int count = 0;
   NodeType* temp = L;
-  while(temp != NULL){
+  while(temp != NULL) {
     count++;
     temp = temp->Link;
   }
