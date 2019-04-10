@@ -1,13 +1,7 @@
-/* This is the file PQImplementation.c */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "../headers/PQInterface.h"
-
-/* Now we give all the details of the functions */
-/* declared in the interface file together with */
-/* local private functions.                     */
 
 int differs(word curr, word goal) {                                             //Implementation of the heuristic function
   int l = strlen(curr);
@@ -47,7 +41,6 @@ PQListNode *SortedInsert(PQItem Item, PQListNode *P, word goal) {               
    if ((P == NULL) || (f(Item,goal) <= f(P->NodeItem,goal))) {                  //use of the heuristic function
       N = malloc(sizeof(PQListNode));
       if(N == NULL) printf("Stack overflow!!\n");
-
       N->NodeItem = Item;
       N->Link = P;
       return(N);
