@@ -22,11 +22,11 @@ int binsearch(word w, int n, word* array) {
       low = mid + 1;
     else return mid;
   }
-  return -1;
+  return -1; //if not found return error
 }
 
 void visited(word w, word* array, char* bool_aray) {
-  /*we are sure that the word is in the dictionary so we can handle an endless loop(that we will evemtually break)*/
+  /*by now, we are sure that the word is in the dictionary so we can handle an endless loop(that we will evemtually break)*/
   for(int i = 0 ;; i++) {
     if(strcmp(w,array[i]) == 0) {
       bool_aray[i] = 1;
@@ -55,11 +55,13 @@ word change(word a, int index, char letter) {
 NodePointer Similar(word w, word* word_array, int n_lines,word goal, int* done) {
   int length = strlen(w);
   NodePointer list = NULL;
+  /*try all the letters of the alphabet, in any position of the word*/
   for(int i = 0; i < length; i++) {
     for(char l = 'a'; l <= 'z'; l++) {
       word new = change(w,i,l);
       if(bsearch(&new, word_array, n_lines, sizeof(char*),cmpfunc) != NULL) {
         if(strcmp(goal,new) == 0) {
+          /*hold a flag to see if we have found the word in SImilar function, so no need to push unnecessary words in our queue*/
           *done = 1;
           return NULL;
         }
@@ -84,7 +86,7 @@ void Convert(word start, word end, word*word_array, int n_lines) {
   visited(end, word_array, explored);                                           //and mark it as visited
 
   Insert(initial, queue,start);
-  word new = malloc((strlen(start)+1)*sizeof(char));
+  word new = malloc((strlen(start) + 1) * sizeof(char));
   if(new == NULL){
     printf("Stack overflow!\n");
     return;
